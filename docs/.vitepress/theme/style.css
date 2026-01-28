@@ -1,0 +1,32 @@
+/* src/.vitepress/theme/style.css */
+
+/* 代码块容器样式 */
+.markdown-body pre {
+  background-color: #282c34; /* 深色背景 */
+  color: #abb2bf;            /* 浅色文字 */
+  padding: 1.25rem;          /* 内边距 */
+  border-radius: 8px;        /* 圆角 */
+  overflow-x: auto;          /* 如果代码太长，允许横向滚动 */
+  margin: 16px 0;            /* 上下间距 */
+  line-height: 1.5;          /* 行高 */
+  font-family: 'Fira Code', 'Consolas', monospace; /* 等宽字体 */
+  position: relative;
+  z-index: 1;
+}
+
+/* 代码块中的文字样式 */
+.markdown-body code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+/* 行内代码样式 (比如 `npm install` 这种) */
+.markdown-body :not(pre) > code {
+  background-color: #f3f4f6; /* 浅灰背景 */
+  color: #d63200;            /* 醒目的红色 */
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
