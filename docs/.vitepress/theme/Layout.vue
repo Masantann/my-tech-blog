@@ -1,34 +1,30 @@
 <script setup>
 import { useData } from 'vitepress'
 import { computed } from 'vue'
+import NavBar from './components/NavBar.vue'
 import Home from './views/Home.vue'
 import Article from './views/Article.vue'
 
 const { frontmatter } = useData()
-
-// 路由逻辑：如果 markdown 文件的 frontmatter 写了 layout: home，就显示 Home 组件
 const isHome = computed(() => frontmatter.value.layout === 'home')
 </script>
 
 <template>
-    <div class="app-container">
-        <nav class="global-nav">
-            <span>My Blog</span>
-        </nav>
+    <div class="min-h-screen antialiased bg-gray-50 dark:bg-black transition-colors duration-300">
+        <!-- 顶部导航 -->
+        <NavBar />
 
-        <component :is="isHome ? Home : Article" />
+        <!-- 页面内容 + 过渡动画 -->
+        <main>
+            <Transition name="fade" mode="out-in">
+                <component :is="isHome ? Home : Article" :key="isHome ? 'home' : 'article'" />
+            </Transition>
+        </main>
 
+        <!-- 页脚 -->
+        <footer class="py-12 text-center text-sm text-zinc-400 border-t border-zinc-200 dark:border-zinc-800 mt-20">
+            <p>Designed with ❤️ by Codexuan</p>
+            <p class="mt-2 text-xs opacity-60">Powered by VitePress & UnoCSS</p>
+        </footer>
     </div>
 </template>
-
-<style>
-/* 全局布局样式 */
-.global-nav {
-    height: 60px;
-    border-bottom: 1px solid #eaeaea;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    font-weight: bold;
-}
-</style>

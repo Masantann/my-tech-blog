@@ -1,9 +1,13 @@
+// docs/.vitepress/theme/index.js
+import DefaultTheme from 'vitepress/theme'
 import Layout from './Layout.vue'
 import './style.css'
+import 'uno.css' // 👈 关键：引入 UnoCSS 生成的样式
 
 export default {
-    Layout, // 指定使用我们自己的 Layout
+    extends: DefaultTheme,
+    Layout,
     enhanceApp({ app }) {
-        // 以后可以在这里注册全局组件
+        // 可以在这里注册全局组件
     }
 }

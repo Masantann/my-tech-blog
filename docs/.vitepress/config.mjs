@@ -1,41 +1,44 @@
+// docs/.vitepress/config.mjs
 import { defineConfig } from 'vitepress'
+import Unocss from 'unocss/vite'
+import { presetUno, presetIcons, presetTypography, presetWebFonts } from 'unocss'
 
 export default defineConfig({
-  // 1. 网站标题（改成你的英文名）
-  title: "Codexuan Blog",
-  description: "Web Developer Resume",
-
+  title: "Codexuan",
+  description: "A digital garden",
   themeConfig: {
-    // 2. 顶部导航栏
-    nav: [
-      { text: '首页', link: '/' },
-      // 指向你的“伪造日期”文章
-      { text: '技术笔记', link: '/vue-reactivity' }
-    ],
-
-    // 3. 侧边栏（这里决定左侧菜单显示什么）
-    sidebar: [
-      {
-        text: '2023 归档', // 假装这是 2023 年的分组
-        items: [
-          // link 对应你的文件名（不带 .md）
-          { text: 'Vue3 响应式原理', link: '/vue-reactivity' }
-        ]
-      }
-    ],
-
-    // 4. 【关键】关闭 GitHub 链接
-    // 为了不让面试官点进去看到所有的提交都是“今天”，这里留空！
-    socialLinks: [],
-
-    // 5. 【关键】关闭“最后更新时间”
-    // 防止页面底部显示 "Last updated: just now"，导致露馅
-    lastUpdated: false,
-
-    // 6. 底部版权
-    footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2023-present Codexuan'
-    }
+    // 禁用默认的 nav 和 sidebar，完全由我们接管 Layout
+    nav: [],
+    sidebar: [],
+  },
+  vite: {
+    plugins: [
+      Unocss({
+        presets: [
+          presetUno(), // 兼容 Tailwind CSS
+          presetIcons({
+            scale: 1.2,
+            warn: true,
+          }), // 支持图标 class="i-carbon-sun"
+          presetTypography(), // 优美的排版 prose
+          presetWebFonts({
+            fonts: {
+              sans: 'Inter:400,600,800', // 引入现代英文字体
+              mono: 'Fira Code',
+            },
+          }),
+        ],
+        shortcuts: {
+          'btn': 'px-4 py-2 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-300',
+          'card': 'bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-all duration-300',
+          'flex-center': 'flex items-center justify-center',
+        },
+        theme: {
+          colors: {
+            primary: '#10b981', // Emerald 500
+          }
+        }
+      })
+    ]
   }
 })
